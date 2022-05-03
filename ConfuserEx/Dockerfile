@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/framework/sdk:3.5-windowsservercore-ltsc2019
+FROM mcr.microsoft.com/dotnet/framework/sdk:3.5-windowsservercore-ltsc2022
 WORKDIR C:/ConfuserEx/
 COPY scripts/Create-ConfuserXml.ps1 ./
 SHELL [ "powershell", "-Command" ]
