@@ -16,6 +16,7 @@ The file path to write the end result into.
 param
 (
     [parameter(Mandatory=$false)][String[]]$Binaries,
+    [parameter(Mandatory=$false)][String[]]$rulepreset,
     [parameter(Mandatory=$false)][String[]]$Protections,
     [parameter(Mandatory=$false)][String]$OutFile = "$(Join-Path -Path $(Get-Location) -ChildPath Confuser.crproj)"
 )
@@ -25,10 +26,10 @@ $XMLHEADER = "<?xml version=`"1.0`" encoding=`"utf-8`"?>"
 Set-Content -Path $OutFile $XMLHEADER
 
 # Set Project Tag
-$PROJECTTAG = "<project baseDir=`".`" outputDir=`"Confused`" xmlns=`"http://confuser.codeplex.com`">"
+$PROJECTTAG = "<project seed=`"$(New-Guid)`" baseDir=`".`" outputDir=`"Confused`" xmlns=`"http://confuser.codeplex.com`">"
 Add-Content -Path $OutFile "$PROJECTTAG"
 # Set Rule and Protections
-$RULETAG = "<rule preset=`"none`" pattern=`"true`">"
+$RULETAG = "<rule preset=`"$rulepreset`" pattern=`"true`">"
 Add-Content -Path $OutFile "`t$RULETAG"
 $PROTECTIONTAG = "<protection id=`"%%ID%%`" />"
 foreach ($protection in $Protections){
